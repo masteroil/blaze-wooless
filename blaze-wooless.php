@@ -92,9 +92,10 @@ function enqueue_blaze_wooless_scripts($hook)
     }
 
     wp_enqueue_script('blaze-wooless-scripts', plugin_dir_url(__FILE__) . 'assets/js/blaze-wooless.js', array('jquery'), '1.0.0', true);
+    // Localize the script with the correct ajax_url
+    wp_localize_script('blaze-wooless-scripts', 'ajax_object', array('ajax_url' => admin_url('admin-ajax.php')));
 }
-
-add_action('admin_enqueue_scripts', 'enqueue_blaze_wooless_scripts');
+add_action('wp_enqueue_scripts', 'enqueue_blaze_wooless_scripts');
 
 function add_typesense_product_indexer_menu()
 {
