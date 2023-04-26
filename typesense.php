@@ -17,7 +17,7 @@ use Typesense\Client;
 function getTypeSenseClient($typesense_private_key)
 {
     $client = new Client([
-        'api_key' => $typesense_private_key, 
+        'api_key' => $typesense_private_key,
         'nodes' => [
             [
                 'host' => 'gq6r7nsikma359hep-1.a1.typesense.net',
@@ -36,12 +36,12 @@ add_action('admin_menu', 'add_typesense_product_indexer_menu');
 add_action('wp_ajax_index_data_to_typesense', 'index_data_to_typesense');
 add_action('wp_ajax_get_typesense_collections', 'get_typesense_collections');
 add_action('wp_ajax_save_typesense_api_key', 'save_typesense_api_key');
-add_action('wp_update_nav_menu', 'update_typesense_document_on_menu_update', 10, 2);
 add_action('edited_term', 'update_typesense_document_on_taxonomy_edit', 10, 3);
 add_action('updated_option', 'site_info_update', 10, 3);
 add_action('woocommerce_new_product', 'bwl_on_product_save', 10, 2);
 add_action('woocommerce_update_product', 'bwl_on_product_save', 10, 2);
 add_action('woocommerce_order_status_changed', 'bwl_on_order_status_changed', 10, 4);
+add_action('wp_update_nav_menu', 'update_typesense_document_on_menu_update', 10, 2);
 
 
 
@@ -562,21 +562,21 @@ function site_info_index_to_typesense()
         add_action('update_option_date_format', 'my_date_format_updated_callback', 10, 3);
         $date_format = get_option('date_format');
         $date_format_last_updated = get_option('date_format_last_updated', time());
-        
+
         // Get available payment gateways
         $available_gateways = WC()->payment_gateways->get_available_payment_gateways();
         $payment_methods = [];
-        
-        if ( ! empty( $available_gateways ) ) {
-            foreach ( $available_gateways as $gateway ) {
+
+        if (!empty($available_gateways)) {
+            foreach ($available_gateways as $gateway) {
                 $payment_methods[] = $gateway->get_title() . ' (ID: ' . $gateway->id . ')';
             }
         }
-        
+
         // Convert payment methods array to a JSON string
         $payment_methods_json = json_encode($payment_methods);
 
- 
+
         global $wpdb;
 
         // Fetch the 'active_plugins' option from the WordPress options table
@@ -651,7 +651,7 @@ function site_info_index_to_typesense()
 
         // Convert the permalink structure to a JSON-encoded string
         $permalink_structure = json_encode($permalink_structure);
-        
+
         // Get WooCommerce stock settings
         $manage_stock = get_option('woocommerce_manage_stock'); // 'yes' or 'no'
         $stock_format = get_option('woocommerce_stock_format'); // 'always', 'never', or 'low_amount'
@@ -680,7 +680,7 @@ function site_info_index_to_typesense()
         // Send the stock display format value to Typesense
         $document_id = 'stock_display_format_setting'; // Set an appropriate document ID
         $updated_at = time(); // Use the current time as the updated_at value
-        
+
         $client->collections[$collection_site_info]->documents->create([
             'name' => 'stock_display_format',
             'value' => $stock_display_format,
@@ -697,7 +697,7 @@ function site_info_index_to_typesense()
 
         $client->collections[$collection_site_info]->documents->create([
             'name' => 'reviews_plugin',
-            'value' =>  $filtered_plugin_directories_string,
+            'value' => $filtered_plugin_directories_string,
             'updated_at' => $updatedAt,
         ]);
 
@@ -850,7 +850,8 @@ function update_typesense_document_on_taxonomy_edit($term_id, $tt_id, $taxonomy)
 }
 
 // Function to be called when an option is updated
-function site_info_update($option_name, $old_value, $new_value) {
+function site_info_update($option_name, $old_value, $new_value)
+{
     // Array of target General Settings options
     $target_settings = array(
         'blogname',

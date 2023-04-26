@@ -89,12 +89,12 @@ function menu_index_to_typesense()
 
 function update_typesense_document_on_menu_update($menu_id, $menu_data)
 {
-    $typesense_private_key = get_option('typesense_api_key');
-    $client = getTypeSenseClient($typesense_private_key);
 
+    $typesense_private_key = get_option('typesense_api_key');
     // Fetch the store ID from the saved options
     $wooless_site_id = get_option('store_id');
     $collection_menu = 'menu-' . $wooless_site_id;
+
     try {
         // Initialize the Typesense client
         $client = getTypeSenseClient($typesense_private_key);
