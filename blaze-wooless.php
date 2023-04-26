@@ -95,7 +95,8 @@ function enqueue_blaze_wooless_scripts($hook)
     // Localize the script with the correct ajax_url
     wp_localize_script('blaze-wooless-scripts', 'ajax_object', array('ajax_url' => admin_url('admin-ajax.php')));
 }
-add_action('wp_enqueue_scripts', 'enqueue_blaze_wooless_scripts');
+add_action('admin_enqueue_scripts', 'enqueue_blaze_wooless_scripts');
+
 
 function add_typesense_product_indexer_menu()
 {
