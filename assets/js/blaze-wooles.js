@@ -1,3 +1,5 @@
+jQuery(document).ready(function ($){
+
 function toggleApiKeyVisibility() {
     var apiKeyInput = document.getElementById("api_key");
     var showApiKeyCheckbox = document.getElementById("show_api_key");
@@ -115,10 +117,14 @@ function indexData() {
     });
 }
 
-
-
-
 // Enable or disable the 'Index Products' button based on the saved API key
 if (document.getElementById("api_key").value !== "") {
     document.getElementById("index_products").disabled = false;
 }
+
+    // Assign functions to global scope
+    window.checkApiKey = checkApiKey;
+    window.indexData = indexData;
+    window.toggleApiKeyVisibility = toggleApiKeyVisibility;
+    window.decodeAndSaveApiKey = decodeAndSaveApiKey;
+});
