@@ -1,8 +1,5 @@
 <?php
 
-add_action('wp_update_nav_menu', 'update_typesense_document_on_menu_update', 10, 2);
-
-
 
 function menu_index_to_typesense()
 {

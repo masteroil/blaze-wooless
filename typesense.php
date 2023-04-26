@@ -36,9 +36,12 @@ add_action('admin_menu', 'add_typesense_product_indexer_menu');
 add_action('wp_ajax_index_data_to_typesense', 'index_data_to_typesense');
 add_action('wp_ajax_get_typesense_collections', 'get_typesense_collections');
 add_action('wp_ajax_save_typesense_api_key', 'save_typesense_api_key');
-
+add_action('wp_update_nav_menu', 'update_typesense_document_on_menu_update', 10, 2);
 add_action('edited_term', 'update_typesense_document_on_taxonomy_edit', 10, 3);
 add_action('updated_option', 'site_info_update', 10, 3);
+add_action('woocommerce_new_product', 'bwl_on_product_save', 10, 2);
+add_action('woocommerce_update_product', 'bwl_on_product_save', 10, 2);
+add_action('woocommerce_order_status_changed', 'bwl_on_order_status_changed', 10, 4);
 
 
 

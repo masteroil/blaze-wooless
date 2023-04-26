@@ -1,10 +1,6 @@
 <?php
 
 
-add_action('woocommerce_new_product', 'bwl_on_product_save', 10, 2);
-add_action('woocommerce_update_product', 'bwl_on_product_save', 10, 2);
-add_action('woocommerce_order_status_changed', 'bwl_on_order_status_changed', 10, 4);
-
 function getTermData($taxonomyTerms)
 {
 $termData = [];
