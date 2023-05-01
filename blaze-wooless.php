@@ -37,7 +37,7 @@ function getTypeSenseClient($typesense_private_key)
 }
 
 add_action('admin_enqueue_scripts', 'enqueue_typesense_product_indexer_scripts');
-add_action('admin_init', 'add_typesense_product_indexer_menu');
+add_action('admin_menu', 'register_blaze_wooless_menu');
 add_action('wp_ajax_index_data_to_typesense', 'index_data_to_typesense');
 add_action('wp_ajax_get_typesense_collections', 'get_typesense_collections');
 add_action('wp_ajax_save_typesense_api_key', 'save_typesense_api_key');
@@ -90,18 +90,19 @@ add_action('admin_enqueue_scripts', 'typesense_enqueue_scripts');
 
 
 
-function add_typesense_product_indexer_menu()
+function register_blaze_wooless_menu()
 {
     add_menu_page(
-        'Typesense Product Indexer',
-        'Typesense Product Indexer',
+        'Blaze Wooless',
+        'Blaze Wooless',
         'manage_options',
-        'typesense-product-indexer',
-        'typesense_product_indexer_page',
-        'dashicons-admin-generic'
+        'blaze-wooless',
+        'render_blaze_wooless_content',
+        'dashicons-admin-plugins'
     );
 }
-function typesense_product_indexer_page()
+
+function render_blaze_wooless_content()
 {
 
     echo '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">';
