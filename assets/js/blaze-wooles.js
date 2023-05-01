@@ -27,8 +27,8 @@ function decodeAndSaveApiKey(apiKey) {
             console.log("Error saving API Key:", response);
         },
     });
-
 }
+
 
 function checkApiKey() {
     var apiKey = document.getElementById("api_key").value;

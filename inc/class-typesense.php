@@ -37,21 +37,13 @@ class bwl_Blaze_Typesense
             update_option('private_key_master', $private_key);
             update_option('typesense_api_key', $typesense_api_key);
             update_option('store_id', $store_id);
-
-            //echo "Private key, API key, and store ID saved successfully.";
-            // Construct the message to display
-            $phpmessage = "Private key: " . $private_key . "<br>";
-            $phpmessage .= "Typesense API key: " . $typesense_api_key . "<br>";
-            $phpmessage .= "Store ID: " . $store_id;
-
-            // Echo the message to the div
-            //echo "<script>document.getElementById('phpdecoded').innerHTML = 'Private key, API key, and store ID saved successfully.';</script>";
         } else {
             echo "Error: Private key not provided.";
         }
 
         wp_die();
     }
+
 
 
     function get_typesense_collections()
