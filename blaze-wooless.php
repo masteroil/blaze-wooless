@@ -37,7 +37,7 @@ function getTypeSenseClient($typesense_private_key)
 }
 
 add_action('admin_enqueue_scripts', 'enqueue_typesense_product_indexer_scripts');
-add_action('admin_menu', 'register_blaze_wooless_menu');
+add_action('admin_menu', 'add_typesense_product_indexer_menu');
 add_action('wp_ajax_index_data_to_typesense', 'index_data_to_typesense');
 add_action('wp_ajax_get_typesense_collections', 'get_typesense_collections');
 add_action('wp_ajax_save_typesense_api_key', 'save_typesense_api_key');
@@ -77,7 +77,7 @@ function typesense_enqueue_styles($hook)
         return;
     }
 
-    //Register and enqueue your stylesheet
+    // Register and enqueue your stylesheet
     wp_register_style('typesense_admin_styles', plugin_dir_url(__FILE__) . 'assets/css/style.css', array(), '1.0.0');
     wp_enqueue_style('typesense_admin_styles');
     wp_register_script('typesense_admin_script', plugin_dir_url(__FILE__) . 'assets/js/blaze-wooles.js', array('jquery'), '1.0.0');
@@ -90,26 +90,58 @@ add_action('admin_enqueue_scripts', 'typesense_enqueue_scripts');
 
 
 
-function register_blaze_wooless_menu()
+function add_typesense_product_indexer_menu()
 {
     add_menu_page(
-        'Blaze Wooless',
-        'Blaze Wooless',
+        'Typesense Product Indexer',
+        'Typesense Product Indexer',
         'manage_options',
-        'blaze-wooless',
-        'render_blaze_wooless_content',
-        'dashicons-admin-plugins'
+        'typesense-product-indexer',
+        'typesense_product_indexer_page',
+        'dashicons-admin-generic'
     );
 }
-
-function render_blaze_wooless_content()
+function typesense_product_indexer_page()
 {
 
     echo '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">';
     $private_key_master = get_option('private_key_master', '');
+    ?>
+    <div class="indexer_page">
+        <h1>Typesense Product Indexer</h1>
+        <div id="wrapper-id" class="message-wrapper">
+            <div class="message-image">
+                <img src="<?php echo plugins_url('blaze-wooless/assets/image/Shape.png'); ?>" alt="" srcset="">
+            </div>
+            <div class="wooless_message">
+                <div class="message_success">Success</div>
+                <div id="message"></div>
+            </div>
+        </div>
+        <div class="wrapper">
+            <label class="api_label" for="api_key">API Private Key: </label>
+            <div class="input-wrapper">
+                <input class="input_p" type="password" id="api_key" name="api_key"
+                    value="<?php echo esc_attr($private_key_master); ?>" />
+                <div class="error-icon" id="error_id" style="display: none;">
+                    <img src="<?php echo plugins_url('blaze-wooless/assets/image/error.png'); ?>" alt="" srcset="">
+                    <div id=" error_message">
+                    </div>
+                </div>
+            </div>
+            <input type="checkbox" id="show_api_key" onclick="toggleApiKeyVisibility()">
+            <label class="checkbox_Label">Show API Key</label>
+        </div>
+        <div class="item_wrapper_indexer_page">
+            <button id="index_products" onclick="indexData()" disabled>Manual Sync
+            </button>
+            <button id="check_api_key" onclick="checkApiKey()">Save</button>
+            <div id="jsdecoded" style="margin-top: 10px;"></div>
+            <div id="phpdecoded" style="margin-top: 10px;"></div>
+        </div>
+    </div>
 
-
-    include plugin_dir_path(__FILE__) . 'views/index-page.php';
+    <?php
 
 }
 
