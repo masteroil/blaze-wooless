@@ -37,7 +37,7 @@ function getTypeSenseClient($typesense_private_key)
 }
 
 add_action('admin_enqueue_scripts', 'enqueue_typesense_product_indexer_scripts');
-add_action('admin_menu', 'add_typesense_product_indexer_menu');
+add_action('admin_init', 'add_typesense_product_indexer_menu');
 add_action('wp_ajax_index_data_to_typesense', 'index_data_to_typesense');
 add_action('wp_ajax_get_typesense_collections', 'get_typesense_collections');
 add_action('wp_ajax_save_typesense_api_key', 'save_typesense_api_key');
