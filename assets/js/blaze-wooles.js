@@ -34,7 +34,7 @@ function checkApiKey() {
     var apiKey = document.getElementById("api_key").value;
     var data = {
         'action': 'get_typesense_collections',
-        'api_key': apiKey,
+        'api_key': typesensePrivateKey,
     };
     document.getElementById("wrapper-id").style.display = "none";
     document.getElementById("index_products").disabled = true;

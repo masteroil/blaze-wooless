@@ -4,6 +4,9 @@ require 'vendor/autoload.php';
 use Symfony\Component\HttpClient\HttplugClient;
 use Typesense\Client;
 
+
+wp_register_script('typesense_admin_script', plugin_dir_url(__FILE__) . 'assets/js/blaze-wooles.js', array('jquery'), '1.0.0');
+wp_enqueue_script('typesense_admin_script');
 class bwl_Blaze_Typesense
 {
 
