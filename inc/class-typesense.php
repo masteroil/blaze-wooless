@@ -1,6 +1,6 @@
 <?php
 
-require 'inc/vendor/autoload.php';
+require 'vendor/autoload.php';
 use Symfony\Component\HttpClient\HttplugClient;
 use Typesense\Client;
 

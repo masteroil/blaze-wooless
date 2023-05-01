@@ -36,7 +36,7 @@ add_action('wp_update_nav_menu', 'update_typesense_document_on_menu_update', 10,
 
 
 // Instantiate the Blaze_Typesense class
-$blaze_typesense = new Blaze_Typesense();
+$blaze_typesense = new bwl_Blaze_Typesense();
 
 // Use the class instance to call functions, e.g.:
 $blaze_typesense->save_typesense_api_key();

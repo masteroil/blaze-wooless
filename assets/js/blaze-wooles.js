@@ -12,26 +12,20 @@ function toggleApiKeyVisibility() {
 }
 
 function decodeAndSaveApiKey(apiKey) {
-    var decodedApiKey = atob(apiKey);
-    var trimmedApiKey = decodedApiKey.split(':');
-    var typesensePrivateKey = trimmedApiKey[0];
-    var woolessSiteId = trimmedApiKey[1];
-
-    // Display API key and store ID for testing purposes
-    //document.getElementById("jsdecoded").innerHTML = 'Typesense Private Key: ' + typesensePrivateKey +
-    //  '<br> Store ID: ' +
-    //woolessSiteId;
-
-    // Save the API key, store ID, and private key
-    jQuery.post(ajaxurl, {
-        'action': 'save_typesense_api_key',
-        'api_key': apiKey, // Add the private key in the request
-        'typesense_api_key': typesensePrivateKey,
-        'store_id': woolessSiteId,
-    }, function(save_response) {
-        setTimeout(function() {
-            document.getElementById("message").textContent += ' - ' + save_response;
-        }, 1000);
+    jQuery.ajax({
+        type: "POST",
+        url: ajaxurl,
+        data: {
+            action: "save_typesense_api_key",
+            api_key: apiKey,
+        },
+        success: function (response) {
+            console.log("Saving API Key response:", response);
+            document.getElementById("phpdecoded").innerHTML = response;
+        },
+        error: function (response) {
+            console.log("Error saving API Key:", response);
+        },
     });
 
 }
